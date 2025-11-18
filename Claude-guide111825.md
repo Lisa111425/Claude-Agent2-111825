@@ -194,3 +194,50 @@ pythonst.markdown(f"""<div style="text-align: center; padding: 2rem; opacity: 0.
     <p>Powered by OpenAI, Google Gemini, xAI Grok & Anthropic Claude • Built with Streamlit</p> 
     <p style="font-size: 0.8rem;">© 2024 • Theme: {st.session_state.theme}</p></div>""", unsafe_allow_html=True)
 Location: Replace the footer text at the end of the file
+
+Installation Requirements
+Add to your requirements.txt:
+txtanthropic>=0.40.0
+Or install via pip:
+bashpip install anthropic
+
+Environment Variable Setup
+Add your Anthropic API key to your environment:
+bashexport ANTHROPIC_API_KEY="your-api-key-here"
+```
+
+Or in your `.env` file:
+```
+ANTHROPIC_API_KEY=your-api-key-here
+
+Summary of Changes
+SectionLinesChange TypeDescriptionImportsAfter 15AddImport Anthropic libraryModelChoice70-78ReplaceAdd Claude modelsLLMRouter.init80-82ReplaceAdd _anthropic_client_init_clients84-91ReplaceInitialize Anthropic clientgenerate_text93-100ReplaceAdd Anthropic routinggenerate_vision102-109ReplaceAdd Anthropic visionNew MethodsAfter 149InsertAdd _anthropic_chat & _anthropic_visionSidebarAfter 443InsertAdd Anthropic statusProvider Counter467-471ReplaceUpdate to 4 providersModel Selectors513, 572ReplaceAdd Claude models to dropdownsChart Colors698, 713, 729ReplaceAdd Anthropic colorFooter790ReplaceAdd Anthropic credit
+
+Testing Checklist
+After implementing changes:
+
+ Verify Anthropic API key is detected in sidebar
+ Test Claude model selection in OCR section
+ Test Claude model in agent configuration
+ Execute an agent with Claude model
+ Verify dashboard shows "Anthropic" provider
+ Check charts display Anthropic color correctly
+ Test vision capabilities with Claude (if using OCR)
+ Verify 4/4 providers counter when all APIs connected
+
+
+Troubleshooting
+Issue: "Anthropic not connected" shows even with API key
+
+Solution: Restart the Streamlit app after setting environment variable
+
+Issue: Model not generating output
+
+Solution: Check that max_tokens is at least 800 for complex outputs
+
+Issue: Vision OCR not working
+
+Solution: Ensure you're using claude-sonnet-4.5 or claude-sonnet-4-20250514 (Haiku doesn't support vision)
+
+
+This comprehensive guide maintains all original functionality while seamlessly integrating Anthropic's Claude models into your FDA review system!
